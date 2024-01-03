@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dws7ti5sqgac8"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_c0viv"]
+[ext_resource type="Texture2D" uid="uid://2qsevpue717p" path="res://assets/bird/redbird-downflap.png" id="1_rk3gb"]
+[ext_resource type="Texture2D" uid="uid://cubgri6f2hkpp" path="res://assets/bird/redbird-midflap.png" id="2_s3yaa"]
+[ext_resource type="Texture2D" uid="uid://b30t08q6e8x1u" path="res://assets/bird/redbird-upflap.png" id="3_fau2t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4os13"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rk3gb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_s3yaa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fau2t")
+}],
+"loop": true,
+"name": &"flap",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mjh1o"]
+radius = 12.0
+height = 34.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(144, 256)
+script = ExtResource("1_c0viv")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4os13")
+animation = &"flap"
+frame_progress = 0.809849
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mjh1o")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(75, 0)
+limit_left = 0
+limit_top = 0
+limit_bottom = 512

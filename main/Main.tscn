@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://x8gnmqtjvyv5"]
+
+[ext_resource type="Script" path="res://main/Main.gd" id="1_5rvh4"]
+[ext_resource type="Texture2D" uid="uid://6ruq3cdubq76" path="res://assets/backgrounds/background-day.png" id="1_ujjio"]
+[ext_resource type="PackedScene" uid="uid://dws7ti5sqgac8" path="res://player/player.tscn" id="2_6gtc1"]
+[ext_resource type="Texture2D" uid="uid://dn5kwacagpgfv" path="res://assets/tiles/base.png" id="3_0gg78"]
+[ext_resource type="PackedScene" uid="uid://ctswii72ftptk" path="res://ground/ground.tscn" id="3_v1wwo"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_5rvh4")
+ground_file = ExtResource("3_v1wwo")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(2, -2)
+motion_mirroring = Vector2(288, 0)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(142, 258)
+texture = ExtResource("1_ujjio")
+region_rect = Rect2(0, 0, 2880, 512)
+
+[node name="Ground" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(142, 464)
+scale = Vector2(0.86, 0.86)
+texture = ExtResource("3_0gg78")
+
+[node name="Player" parent="." instance=ExtResource("2_6gtc1")]
+position = Vector2(51, 255)
+
+[node name="Ground" parent="." instance=ExtResource("3_v1wwo")]
+visible = false
+collision_mask = 2
+
+[node name="GroundTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[connection signal="timeout" from="GroundTimer" to="." method="_on_ground_timer_timeout"]
