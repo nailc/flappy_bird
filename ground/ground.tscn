@@ -1,29 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctswii72ftptk"]
+[gd_scene load_steps=3 format=3 uid="uid://ctswii72ftptk"]
 
 [ext_resource type="Texture2D" uid="uid://dn5kwacagpgfv" path="res://assets/tiles/base.png" id="1_wo1td"]
-
-[sub_resource type="GDScript" id="GDScript_1ydal"]
-script/source = "extends StaticBody2D
-
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free() # Replace with function body.
-	print('COUCOU LOL')
-"
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ygyvw"]
 distance = 1.0
 
 [node name="Ground" type="StaticBody2D"]
+z_index = 1
 position = Vector2(0, -1)
-script = SubResource("GDScript_1ydal")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 position = Vector2(144, 464)
 scale = Vector2(0.86, 0.86)
 texture = ExtResource("1_wo1td")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
 position = Vector2(142, 418)
 shape = SubResource("WorldBoundaryShape2D_ygyvw")
 
